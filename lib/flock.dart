@@ -1,5 +1,15 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/material.dart';
+
+class FlockWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _FlockWidgetState();
+  }
+}
+
+class _FlockWidgetState extends State<FlockWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: Text('Flock'));
+  }
 }
