@@ -17,163 +17,220 @@ class FlockCanvasBlock {
 
   FlockCanvasBlock({required this.block, required this.x, required this.y});
 
-  Path getStatementBlockPath(double blockWidth) {
+  Path getStatementBlockPath(double blockWidth, [Offset offset = Offset.zero]) {
+    final double adjustedX = x + offset.dx;
+    final double adjustedY = y + offset.dy;
+
     return Path()
-      ..moveTo(x, y + blockAngle)
+      ..moveTo(adjustedX, adjustedY + blockAngle)
       ..arcToPoint(
-        Offset(x + blockAngle, y),
+        Offset(adjustedX + blockAngle, adjustedY),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart - blockAngle, y)
+      ..lineTo(adjustedX + blockActionHoleStart - blockAngle, adjustedY)
       ..arcToPoint(
-        Offset(x + blockActionHoleStart, y + blockAngle),
+        Offset(adjustedX + blockActionHoleStart, adjustedY + blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: false,
       )
       ..lineTo(
-        x + blockActionHoleStart + blockActionHoleWidth - blockAngle,
-        y + blockAngle,
+        adjustedX + blockActionHoleStart + blockActionHoleWidth - blockAngle,
+        adjustedY + blockAngle,
       )
       ..arcToPoint(
-        Offset(x + blockActionHoleStart + blockActionHoleWidth, y),
+        Offset(
+          adjustedX + blockActionHoleStart + blockActionHoleWidth,
+          adjustedY,
+        ),
         radius: const Radius.circular(blockAngle),
         clockwise: false,
       )
-      ..lineTo(x + blockWidth - blockAngle, y)
+      ..lineTo(adjustedX + blockWidth - blockAngle, adjustedY)
       ..arcToPoint(
-        Offset(x + blockWidth, y + blockAngle),
+        Offset(adjustedX + blockWidth, adjustedY + blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockWidth, y + blockHeight - blockAngle)
+      ..lineTo(adjustedX + blockWidth, adjustedY + blockHeight - blockAngle)
       ..arcToPoint(
-        Offset(x + blockWidth - blockAngle, y + blockHeight),
+        Offset(adjustedX + blockWidth - blockAngle, adjustedY + blockHeight),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart + blockActionHoleWidth, y + blockHeight)
+      ..lineTo(
+        adjustedX + blockActionHoleStart + blockActionHoleWidth,
+        adjustedY + blockHeight,
+      )
       ..arcToPoint(
         Offset(
-          x + blockActionHoleStart + blockActionHoleWidth - blockAngle,
-          y + blockHeight + blockAngle,
+          adjustedX + blockActionHoleStart + blockActionHoleWidth - blockAngle,
+          adjustedY + blockHeight + blockAngle,
         ),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart, y + blockHeight + blockAngle)
+      ..lineTo(
+        adjustedX + blockActionHoleStart,
+        adjustedY + blockHeight + blockAngle,
+      )
       ..arcToPoint(
-        Offset(x + blockActionHoleStart - blockAngle, y + blockHeight),
+        Offset(
+          adjustedX + blockActionHoleStart - blockAngle,
+          adjustedY + blockHeight,
+        ),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockAngle, y + blockHeight)
+      ..lineTo(adjustedX + blockAngle, adjustedY + blockHeight)
       ..arcToPoint(
-        Offset(x, y + blockHeight - blockAngle),
+        Offset(adjustedX, adjustedY + blockHeight - blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
       ..close();
   }
 
-  Path getActionBlockPath(double blockWidth) {
+  Path getActionBlockPath(double blockWidth, [Offset offset = Offset.zero]) {
+    final double adjustedX = x + offset.dx;
+    final double adjustedY = y + offset.dy;
+
     return Path()
-      ..moveTo(x, y + blockAngle)
+      ..moveTo(adjustedX, adjustedY + blockAngle)
       ..arcToPoint(
-        Offset(x + blockAngle, y),
+        Offset(adjustedX + blockAngle, adjustedY),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart - blockAngle, y)
+      ..lineTo(adjustedX + blockActionHoleStart - blockAngle, adjustedY)
       ..arcToPoint(
-        Offset(x + blockActionHoleStart, y + blockAngle),
+        Offset(adjustedX + blockActionHoleStart, adjustedY + blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: false,
       )
       ..lineTo(
-        x + blockActionHoleStart + blockActionHoleWidth - blockAngle,
-        y + blockAngle,
+        adjustedX + blockActionHoleStart + blockActionHoleWidth - blockAngle,
+        adjustedY + blockAngle,
       )
       ..arcToPoint(
-        Offset(x + blockActionHoleStart + blockActionHoleWidth, y),
+        Offset(
+          adjustedX + blockActionHoleStart + blockActionHoleWidth,
+          adjustedY,
+        ),
         radius: const Radius.circular(blockAngle),
         clockwise: false,
       )
-      ..lineTo(x + blockWidth - blockAngle, y)
+      ..lineTo(adjustedX + blockWidth - blockAngle, adjustedY)
       ..arcToPoint(
-        Offset(x + blockWidth, y + blockAngle),
+        Offset(adjustedX + blockWidth, adjustedY + blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockWidth, y + blockHeight - blockAngle)
+      ..lineTo(adjustedX + blockWidth, adjustedY + blockHeight - blockAngle)
       ..arcToPoint(
-        Offset(x + blockWidth - blockAngle, y + blockHeight),
+        Offset(adjustedX + blockWidth - blockAngle, adjustedY + blockHeight),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart + blockActionHoleWidth, y + blockHeight)
+      ..lineTo(
+        adjustedX + blockActionHoleStart + blockActionHoleWidth,
+        adjustedY + blockHeight,
+      )
       ..arcToPoint(
         Offset(
-          x + blockActionHoleStart + blockActionHoleWidth - blockAngle,
-          y + blockHeight + blockAngle,
+          adjustedX + blockActionHoleStart + blockActionHoleWidth - blockAngle,
+          adjustedY + blockHeight + blockAngle,
         ),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockActionHoleStart, y + blockHeight + blockAngle)
+      ..lineTo(
+        adjustedX + blockActionHoleStart,
+        adjustedY + blockHeight + blockAngle,
+      )
       ..arcToPoint(
-        Offset(x + blockActionHoleStart - blockAngle, y + blockHeight),
+        Offset(
+          adjustedX + blockActionHoleStart - blockAngle,
+          adjustedY + blockHeight,
+        ),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockAngle, y + blockHeight)
+      ..lineTo(adjustedX + blockAngle, adjustedY + blockHeight)
       ..arcToPoint(
-        Offset(x, y + blockHeight - blockAngle),
+        Offset(adjustedX, adjustedY + blockHeight - blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
       ..close();
   }
 
-  Path getOutputBlockPath(double blockWidth) {
+  Path getOutputBlockPath(double blockWidth, [Offset offset = Offset.zero]) {
+    final double adjustedX = x + offset.dx;
+    final double adjustedY = y + offset.dy;
+
     return Path()
-      ..moveTo(x, y + blockAngle)
+      ..moveTo(adjustedX, adjustedY + blockAngle)
       ..arcToPoint(
-        Offset(x + blockAngle, y),
+        Offset(adjustedX + blockAngle, adjustedY),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockWidth - blockAngle, y)
+      ..lineTo(adjustedX + blockWidth - blockAngle, adjustedY)
       ..arcToPoint(
-        Offset(x + blockWidth, y + blockAngle),
+        Offset(adjustedX + blockWidth, adjustedY + blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockWidth, y + blockHeight - blockAngle)
+      ..lineTo(adjustedX + blockWidth, adjustedY + blockHeight - blockAngle)
       ..arcToPoint(
-        Offset(x + blockWidth - blockAngle, y + blockHeight),
+        Offset(adjustedX + blockWidth - blockAngle, adjustedY + blockHeight),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x + blockAngle, y + blockHeight)
+      ..lineTo(adjustedX + blockAngle, adjustedY + blockHeight)
       ..arcToPoint(
-        Offset(x, y + blockHeight - blockAngle),
+        Offset(adjustedX, adjustedY + blockHeight - blockAngle),
         radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
       // draw output
-      ..lineTo(x, y + blockHeight / 2 + 5)
-      ..lineTo(x - 3, y + blockHeight / 2 + 10)
+      ..lineTo(adjustedX, adjustedY + blockHeight - blockAngle)
       ..arcToPoint(
-        Offset(x - 3, y + blockHeight / 2 - 10),
-        radius: const Radius.circular(5),
+        Offset(
+          adjustedX - blockAngle,
+          adjustedY + blockHeight - blockAngle * 2,
+        ),
+        radius: const Radius.circular(blockAngle),
         clockwise: true,
       )
-      ..lineTo(x, y + blockHeight / 2 - 5)
+      ..lineTo(adjustedX - blockAngle, adjustedY + blockAngle * 2)
+      ..arcToPoint(
+        Offset(adjustedX, adjustedY + blockAngle),
+        radius: const Radius.circular(blockAngle),
+        clockwise: true,
+      )
       ..close();
   }
 
-  drawBlock(Canvas canvas, {bool isSelected = false}) {
+  Offset getBlockSize() {
+    TextPainter textPainter = TextPainter(
+      text: TextSpan(
+        text: block.text,
+        style: const TextStyle(color: Colors.white, fontSize: 12),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout();
+    double blockWidth = textPainter.width + 20;
+    return Offset(blockWidth, blockHeight);
+  }
+
+  drawBlock(
+    Canvas canvas, {
+    bool isSelected = false,
+    Offset offset = Offset.zero,
+  }) {
     TextPainter textPainter = TextPainter(
       text: TextSpan(
         text: block.text,
@@ -197,24 +254,36 @@ class FlockCanvasBlock {
           ..strokeWidth = 2.0;
 
     if (block.type == FlockBlockType.statement) {
-      canvas.drawPath(getStatementBlockPath(blockWidth), paint);
-      textPainter.paint(canvas, Offset(x + 10, y + blockHeight / 2 - 6));
+      canvas.drawPath(getStatementBlockPath(blockWidth, offset), paint);
+      textPainter.paint(
+        canvas,
+        Offset(x + offset.dx + 10, y + blockHeight / 2 - 6 + offset.dy),
+      );
       if (isSelected) {
-        canvas.drawPath(getStatementBlockPath(blockWidth), selectedPaint);
+        canvas.drawPath(
+          getStatementBlockPath(blockWidth, offset),
+          selectedPaint,
+        );
       }
     } else if (block.type == FlockBlockType.output) {
-      canvas.drawPath(getOutputBlockPath(blockWidth), paint);
+      canvas.drawPath(getOutputBlockPath(blockWidth, offset), paint);
       // draw text
-      textPainter.paint(canvas, Offset(x + 10, y + blockHeight / 2 - 6));
+      textPainter.paint(
+        canvas,
+        Offset(x + offset.dx + 10, y + blockHeight / 2 - 6 + offset.dy),
+      );
       if (isSelected) {
-        canvas.drawPath(getOutputBlockPath(blockWidth), selectedPaint);
+        canvas.drawPath(getOutputBlockPath(blockWidth, offset), selectedPaint);
       }
     } else if (block.type == FlockBlockType.action) {
-      canvas.drawPath(getActionBlockPath(blockWidth), paint);
+      canvas.drawPath(getActionBlockPath(blockWidth, offset), paint);
       // draw text
-      textPainter.paint(canvas, Offset(x + 10, y + blockHeight / 2 - 6));
+      textPainter.paint(
+        canvas,
+        Offset(x + 10 + offset.dx, y + blockHeight / 2 - 6 + offset.dy),
+      );
       if (isSelected) {
-        canvas.drawPath(getActionBlockPath(blockWidth), selectedPaint);
+        canvas.drawPath(getActionBlockPath(blockWidth, offset), selectedPaint);
       }
     }
   }

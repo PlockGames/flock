@@ -18,12 +18,15 @@ class FlockWidget extends StatefulWidget {
 class _FlockWidgetState extends State<FlockWidget> {
   int selectedCategory = -1;
   List<FlockCanvasBlock> canvasBlocks = [];
+  FlockCanvasBlock? currentlyDraggedBlock;
+  Offset canvasOffset = Offset.zero;
 
   @override
   void initState() {
     super.initState();
     selectedCategory = -1;
     canvasBlocks = [];
+    currentlyDraggedBlock = null;
   }
 
   @override
@@ -38,7 +41,7 @@ class _FlockWidgetState extends State<FlockWidget> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children:
-                // for each vategory, create a tab
+                // for each category, create a tab
                 widget.blockbox.map((category) {
                   if (category.children.isEmpty) {
                     return const SizedBox();
@@ -102,9 +105,46 @@ class _FlockWidgetState extends State<FlockWidget> {
         Expanded(
           child: DragTarget<FlockCanvasBlock>(
             builder: (context, candidateData, rejectedData) {
-              return CustomPaint(
-                size: Size.infinite,
-                painter: FlockPainter(canvasBlocks: canvasBlocks),
+              return GestureDetector(
+                onPanStart: (details) {
+                  Offset pos = details.localPosition - canvasOffset;
+                  for (var block in canvasBlocks) {
+                    Rect blockRect = Rect.fromLTWH(
+                      block.x,
+                      block.y,
+                      block.getBlockSize().dx,
+                      block.getBlockSize().dy,
+                    );
+
+                    if (blockRect.contains(pos)) {
+                      currentlyDraggedBlock = block;
+                      break;
+                    }
+                  }
+                },
+                onPanUpdate: (details) {
+                  if (currentlyDraggedBlock != null) {
+                    setState(() {
+                      currentlyDraggedBlock!.x += details.delta.dx;
+                      currentlyDraggedBlock!.y += details.delta.dy;
+                    });
+                  } else {
+                    setState(() {
+                      canvasOffset += details.delta;
+                    });
+                  }
+                },
+                onPanEnd: (details) {
+                  currentlyDraggedBlock = null;
+                },
+                child: CustomPaint(
+                  size: Size.infinite,
+                  painter: FlockPainter(
+                    canvasBlocks: canvasBlocks,
+                    selectedBlock: currentlyDraggedBlock,
+                    canvasOffset: canvasOffset,
+                  ),
+                ),
               );
             },
             onAcceptWithDetails: (data) {
